@@ -81,6 +81,7 @@
     <script>
       $(document).ready(function () {
         function validateField(field, regex, errorMessage) {
+          
           if (
             field.val() === "" ||
             (!regex.test && !new RegExp(regex).test(field.val())) ||
@@ -103,6 +104,7 @@
         }
 
         $("input, select").blur(function () {
+          console.log('asd');
           var field = $(this);
           var errorMessage = "";
 
@@ -143,13 +145,13 @@
               return;
           }
 
-          validateField(
-            field,
-            field.attr("id") === "email"
-              ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-              : /^[A-Za-z0-9]+$/i,
-            errorMessage
-          );
+          // validateField(
+          //   field,
+          //   field.attr("id") === "email"
+          //     ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+          //     : /^[A-Za-z0-9]+$/i,
+          //   errorMessage
+          // );
           validateField(
             field,
             field.attr("id") === "firstName" ?
@@ -179,7 +181,7 @@
 
           validateField(
             field,
-            field.attr("id") === "firstName",
+            firstName,
             /^[A-Za-z\s]+$/,
             // "Please enter a valid first name"
             errorMessage
