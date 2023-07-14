@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 13, 2023 at 08:46 PM
+-- Generation Time: Jul 14, 2023 at 05:55 PM
 -- Server version: 8.0.33
 -- PHP Version: 8.1.18
 
@@ -305,21 +305,10 @@ CREATE TABLE `users` (
   `email` varchar(32) NOT NULL,
   `username` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL,
+  `dob` date NOT NULL,
   `mobile_number` bigint NOT NULL,
   `country` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `username`, `password`, `mobile_number`, `country`) VALUES
-(1, 'Mann', 'Shah', 'mann.shah@brainvire.com', 'mann', 'Mann@8623', 9328307449, '0'),
-(2, 'Mann', 'Shah', 'mann.shah@brainvire.com', 'Mann', 'Mann@8623', 9328307449, '0'),
-(3, 'Mann', 'Shah', 'mann.shah@brainvire.com', 'Mann', 'Mann@8623', 9328307449, '0'),
-(4, '1', 'Shah', 'mann.shah@brainvire.com', 'mann', 'mANN@123', 9328307449, '0'),
-(5, 'Mann', 'Shah', 'mann.shah@brainvire.com', 'mann', 'M', 9328307449, '0'),
-(6, 'Mann', 'Shah', 'mann.shah@brainvire.com', 'mann', 'M', 9328307449, '0');
 
 --
 -- Indexes for dumped tables
@@ -351,7 +340,7 @@ ALTER TABLE `country`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
