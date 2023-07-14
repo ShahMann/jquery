@@ -15,7 +15,7 @@ if (isset($_POST["submit"])) {
   $dob = $_POST['dob'];
   $mobileNumber = $_POST['mobileNumber'];
   $country = $_POST['country'];
-  $countryId = $_POST['country'];
+  $countryCode = $_POST['country'];
 
   $errors = [];
 
@@ -65,16 +65,14 @@ if (isset($_POST["submit"])) {
   
 
   if (empty($errors)) {
-    $conn = mysqli_connect("localhost", "root", "root", "demo");
 
     $query = "INSERT INTO users (first_name, last_name, email, username, password, mobile_number, dob, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $query);  
-    mysqli_stmt_bind_param($stmt, "ssssssss", $firstName, $lastName, $email, $username, $password, $mobileNumber, $dob, $countryId);
+    mysqli_stmt_bind_param($stmt, "ssssssss", $firstName, $lastName, $email, $username, $password, $mobileNumber, $dob, $countryCode);
     mysqli_stmt_execute($stmt);
     echo "<script>alert('Registration successful!'); window.location.href = '1.php'; </script>";
 
   } else {
-    // echo implode("\n", $errors);
     echo "<script>alert('" . implode("\\n", $errors) . "'); window.location.href = '1.php';</script>";
 
   }

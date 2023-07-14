@@ -150,6 +150,13 @@
               : /^[A-Za-z0-9]+$/i,
             errorMessage
           );
+          validateField(
+            field,
+            field.attr("id") === "firstName" ?
+            /^[A-Z\s]+$/ : /^[a-z\s]+$/i ,
+            // "Please enter a valid first name"
+            errorMessage
+          );
         });
 
         $("input, select").focus(function () {
@@ -171,9 +178,11 @@
           $(".error-message").remove();
 
           validateField(
-            firstName,
+            field,
+            field.attr("id") === "firstName",
             /^[A-Za-z\s]+$/,
-            "Please enter a valid first name"
+            // "Please enter a valid first name"
+            errorMessage
           );
           validateField(
             lastName,
