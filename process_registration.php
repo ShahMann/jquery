@@ -12,6 +12,7 @@ if (isset($_POST["submit"])) {
   $username = $_POST['username'];
   $password = $_POST['password'];
   $confirmPassword = $_POST['confirmPassword'];
+  $dob = $_POST['dob'];
   $mobileNumber = $_POST['mobileNumber'];
   $country = $_POST['country'];
   $countryId = $_POST['country'];
@@ -51,15 +52,25 @@ if (isset($_POST["submit"])) {
   if (empty($country)) {
     $errors[] = "Country is required";
   }
+  if (empty($dob)) {
+    $errors[] = "Date of birth is required";
+  } else {
+    $dobDateTime = DateTime::createFromFormat('Y-m-d', $dob);
+    $currentDate = new DateTime();
+  
+    if (!$dobDateTime || $dobDateTime > $currentDate) {
+      $errors[] = "Invalid date of birth";
+    }
+  }
+  
 
   if (empty($errors)) {
     $conn = mysqli_connect("localhost", "root", "root", "demo");
 
-    $query = "INSERT INTO users (first_name, last_name, email, username, password, mobile_number, country) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "sssssss", $firstName, $lastName, $email, $username, $password, $mobileNumber, $countryId);
+    $query = "INSERT INTO users (first_name, last_name, email, username, password, mobile_number, dob, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $query);  
+    mysqli_stmt_bind_param($stmt, "ssssssss", $firstName, $lastName, $email, $username, $password, $mobileNumber, $dob, $countryId);
     mysqli_stmt_execute($stmt);
-
     echo "<script>alert('Registration successful!'); window.location.href = '1.php'; </script>";
 
   } else {
