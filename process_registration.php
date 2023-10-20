@@ -1,11 +1,17 @@
 <?php
+  error_reporting(E_ALL);
+  ini_set('display_errors', 1);
+  
  $conn = mysqli_connect("localhost", "root", "root", "demo");
 
  if (!$conn) {
    die("Connection failed: " . mysqli_connect_error());
  }
  
-if (isset($_POST["submit"])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  // echo "<script>alert($_SERVER);</script>";
+  // $response = print_r($_SERVER);
+  // echo $response;
   $firstName = $_POST['firstName'];
   $lastName = $_POST['lastName'];
   $email = $_POST['email'];
@@ -70,11 +76,11 @@ if (isset($_POST["submit"])) {
     $stmt = mysqli_prepare($conn, $query);  
     mysqli_stmt_bind_param($stmt, "ssssssss", $firstName, $lastName, $email, $username, $password, $mobileNumber, $dob, $countryCode);
     mysqli_stmt_execute($stmt);
-    echo "<script>alert('Registration successful!'); window.location.href = '1.php'; </script>";
-
+    $result = "<script>alert('Registration successful!'); window.location.href = '1.php'; </script>";
+    echo $result;
   } else {
-    echo "<script>alert('" . implode("\\n", $errors) . "'); window.location.href = '1.php';</script>";
-
+    $result = "<script>alert('" . implode("\\n", $errors) . "'); window.location.href = '1.php';</script>";
+    echo $result;
   }
 }
 ?>

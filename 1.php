@@ -145,18 +145,11 @@
               return;
           }
 
-          // validateField(
-          //   field,
-          //   field.attr("id") === "email"
-          //     ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-          //     : /^[A-Za-z0-9]+$/i,
-          //   errorMessage
-          // );
           validateField(
             field,
-            field.attr("id") === "firstName" ?
-            /^[A-Z\s]+$/ : /^[a-z\s]+$/i ,
-            // "Please enter a valid first name"
+            field.attr("id") === "email"
+              ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+              : /^[A-Za-z0-9]+$/i,
             errorMessage
           );
         });
@@ -181,10 +174,9 @@
 
           validateField(
             field,
-            firstName,
             /^[A-Za-z\s]+$/,
-            // "Please enter a valid first name"
-            errorMessage
+            "Please enter a valid first name"
+            // errorMessage
           );
           validateField(
             lastName,
@@ -245,8 +237,26 @@
           }
 
           if ($(".error-message").length === 0) {
-            // alert("Registration successful!");
-            // $("form")[0].reset();
+
+            var formData = $(this).serialize();
+            console.log(formData);
+
+            $.ajax({
+            url: 'process_registration.php',
+            type: 'POST',
+            data: formData,
+            success: function(result) {
+              $('form')[0].reset();
+
+              alert(result);
+
+
+            },
+            error: function(error) {
+            console.log('AJAX error:', error);
+            }
+        });
+
             
           }
           
@@ -266,7 +276,7 @@
   <body>
     <div class="container">
       <h2>Registration Form</h2>
-      <form action="process_registration.php" method="POST">
+      <form  method="POST">
         <div class="form-group">
           <label for="firstName">First Name</label>
           <input type="text" id="firstName" name="firstName" />
@@ -319,6 +329,7 @@
         <input type="submit" value="Register" name="submit"/>
         <input type="button" id="resetBtn" value="Reset" />
         <input type="button" id="loginBtn" value="Login" />
+
       </form>
     </div>
   </body>
